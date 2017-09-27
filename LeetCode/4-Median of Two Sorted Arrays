@@ -1,0 +1,17 @@
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number}
+ */
+var findMedianSortedArrays = function(nums1, nums2) {
+    var num = nums1.concat(nums2);
+    num.sort(function(num1,num2) {
+        return num1-num2;
+    })
+    if(num.length %2 == 0) {
+        var mid = Math.floor((((num[num.length/2] + num[num.length/2 -1]) /2)*100))/100;
+    }else {
+        var mid = num[Math.floor(num.length/2)];
+    }
+    return mid;
+};

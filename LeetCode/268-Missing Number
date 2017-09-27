@@ -1,0 +1,14 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var missingNumber = function(nums) {
+    nums.sort(function(num1,num2) {
+        return num1 - num2;
+    })
+    for(var i=0;i<nums.length;i++) {
+        var key = i;
+        if(nums[i] != key) return key;
+    }
+    return nums.length;
+};

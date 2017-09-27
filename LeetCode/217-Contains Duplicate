@@ -1,0 +1,9 @@
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var containsDuplicate = function(nums) {
+    var s = new Set(nums);
+    if(s.size != nums.length) return true;
+    return false;
+};

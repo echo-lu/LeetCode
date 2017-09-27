@@ -1,0 +1,30 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var firstMissingPositive = function(nums) {
+    if(nums.length == 0) return 1;
+    nums.sort(function(num1,num2) {
+        return num1 - num2;
+    });
+    var c=0;
+    for(var i=0;i<nums.length;i++) {
+        if(nums[i]<=0) c++;
+    }
+    nums.splice(0,c);
+    var num = [];
+    num[0] = nums[0];
+    for(var i=1;i<nums.length;i++) {
+        
+        if(nums[i-1] != nums[i]) {
+            num.push(nums[i]);
+        }
+    }
+    for(var i=0;i<num.length;i++) {
+        var j = i+1;
+        if(num[i]!= j) {
+            return j;
+        }
+    }
+    return i+1;
+};

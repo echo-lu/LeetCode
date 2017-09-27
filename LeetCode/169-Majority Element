@@ -1,0 +1,27 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    nums.sort(function(num1,num2) {
+        return num2-num1
+    });
+    var count = 1;
+    var numCount=0;
+    var theNum = 0;
+    for(var i=0;i<nums.length;i++) {
+        if(nums[i+1] === nums[i]) {
+            count++;
+        }else {
+            if(count>=Math.floor(nums.length/2)) {
+                if(count>numCount) {
+                    theNum = nums[i];
+                    numCount = count;
+                }
+                
+            }
+            count = 1;
+        }
+    }
+    return theNum;
+};

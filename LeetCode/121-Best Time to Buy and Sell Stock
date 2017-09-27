@@ -1,0 +1,18 @@
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    var sum = 0;
+    for (var i=0;i<prices.length;i++) {
+        var tprice = prices[i];
+        for(var j=i;j<prices.length;j++) {
+            if(i === j) continue;
+            var diff = prices[j] - tprice;
+            if(diff>sum) {
+                sum = diff;
+            }
+        }
+    }
+    return sum;
+};

@@ -1,0 +1,17 @@
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var rotate = function(nums, k) {
+    if(k == 0)  nums = nums;
+    else {
+        var len = nums.length;
+        for(var i=nums.length-1;i>=nums.length-k;i=i-0) {
+            nums.unshift(nums[i]);
+        }
+        nums.splice(len,k);
+    }
+    
+    
+};
