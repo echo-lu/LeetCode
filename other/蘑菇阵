@@ -1,0 +1,80 @@
+/*
+ * 现在有两个好友A和B，住在一片长有蘑菇的由n＊m个方格组成的草地，A在(1,1),B在(n,m)。
+ * 现在A想要拜访B，由于她只想去B的家，所以每次她只会走(i,j+1)或(i+1,j)这样的路线，在草地上有k个蘑菇种在格子里(多个蘑菇可能在同一方格),
+ * 问：A如果每一步随机选择的话(若她在边界上，则只有一种选择)，那么她不碰到蘑菇走到B的家的概率是多少？
+ * 第一行N，M，K(1 ≤ N,M ≤ 20, k ≤ 100),N,M为草地大小，接下来K行，每行两个整数x，y，代表(x,y)处有一个蘑菇。
+ * 输出一行，代表所求概率(保留到2位小数)
+ */
+
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+/**
+ *
+ * @author H
+ */
+public class Main {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner in = new Scanner(System.in);
+        while(true) {
+            int[][] hasM = new int[25][25];
+            double[][] dp = new double[25][25];
+            for(int i=0;i<25;i++) {
+                for(int j=0;j<25;j++) {
+                    hasM[i][j] = 0;
+                    dp[i][j] = 0;
+                }
+            }
+            int n = in.nextInt();
+            int m = in.nextInt();
+            int k = in.nextInt();
+            for(int i=0;i<k;i++) {
+                int x = in.nextInt();
+                int y = in.nextInt();
+                hasM[x][y] = 1;
+            }
+            for(int i=1;i<=n;i++) {
+                for(int j=1;j<=m;j++) {
+                    if(i==1 && j==1) {
+                        dp[1][1] = 1;
+                        continue;
+                    }
+                    if(hasM[i][j]==1) {
+                        dp[i][j] = 0;
+                        continue;
+                    }
+                    if(i==n && j==m) {
+                        dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                        continue;
+                    }               
+                    if(i == n) {
+                        dp[i][j] = dp[i-1][j]*0.5 + dp[i][j-1]; 
+                        continue;
+                    }
+                    if(j == m) {
+                        dp[i][j] = dp[i-1][j] + dp[i][j-1]*0.5; 
+                        continue;
+                    }
+                    if(i == 1) {
+                        dp[i][j] = dp[i][j-1]*0.5; 
+                        continue;
+                    }
+                    if(j == 1) {
+                        dp[i][j] = dp[i-1][j]*0.5; 
+                        continue;
+                    }
+                    dp[i][j] = dp[i][j-1]*0.5 + dp[i-1][j]*0.5;
+                }
+            }
+            double res = dp[n][m];
+            System.out.println(String.format("%.2f", res));
+        }
+    }
+    
+}

@@ -1,0 +1,44 @@
+/*
+ * 现在有一张半径为r的圆桌，其中心位于(x,y)，现在他想把圆桌的中心移到(x1,y1)。每次移动一步，都必须在圆桌边缘固定一个点然后将圆桌绕这个点旋转。
+ * 问最少需要移动几步。
+ * 一行五个整数r,x,y,x1,y1(1≤r≤100000,-100000≤x,y,x1,y1≤100000)
+ * 输出一个整数，表示答案
+ */
+
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+/**
+ *
+ * @author H
+ */
+public class Main {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner in = new Scanner(System.in);
+        while(true) {
+           int r = in.nextInt();
+           int x = in.nextInt();
+           int y = in.nextInt();
+           int x1 = in.nextInt();
+           int y1 = in.nextInt();
+           double dist;
+           if(x1 == x) {
+               dist = Math.abs(y - y1);
+           }else if(y1 == y) {
+               dist = Math.abs(x - x1);
+           }else {
+               dist = Math.sqrt((x-x1)*(x-x1)+(y-y1)*(y-y1));
+           }
+           int c = 0;
+           c = (int) (dist/(r*2));
+           System.out.println(c);
+        }
+    }
+    
+}
